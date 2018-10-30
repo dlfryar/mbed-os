@@ -1,0 +1,10 @@
+{
+    "name": "bootloader_NRF52840_DK",
+    "target_overrides": {
+        "*": {
+            "target.app_offset": "0x3b400",
+            "target.header_offset": "0x3b000",
+            "target.bootloader_img": "mbed-bootloader-spif-nvstore-v3_5_0.hex"
+        }
+    }
+}
