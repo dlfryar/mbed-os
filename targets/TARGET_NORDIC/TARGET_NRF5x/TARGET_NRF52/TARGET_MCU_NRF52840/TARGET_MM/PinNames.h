@@ -60,9 +60,6 @@ extern "C"
 
     typedef enum
     {
-        // Not connected
-        NC = (int)0xFFFFFFFF,
-
         PinDef(0, 0), // P0_0 = 0...
         PinDef(0, 1),
         PinDef(0, 2),
@@ -165,88 +162,149 @@ extern "C"
         p46 = P1_14,
         p47 = P1_15,
 
-        LED1 = p13,
-        LED2 = p14,
-        LED3 = p15,
-        LED4 = p16,
+        // Not connected
+        NC = (int)0xFFFFFFFF,
 
-        BUTTON1 = p11,
-        BUTTON2 = p12,
-        BUTTON3 = p24,
-        BUTTON4 = p25,
+        AC21              = P0_25,             // GPIO
+        AD20              = P0_24,             // GPIO
+        AIN6              = NC,                // ADC
+        AIN7              = NC,                // ADC
 
-        RX_PIN_NUMBER = p8,
-        TX_PIN_NUMBER = p6,
-        CTS_PIN_NUMBER = p7,
-        RTS_PIN_NUMBER = p5,
+        CELL_1v8          = P0_28,             // ADC AIN4
+        CELL_3v8          = P0_29,             // ADC AIN5
+        CELL_EMERG_RST    = P1_4,              // GPIO
+        CELL_ON           = P1_3,              // GPIO
+        CELL_PWR_EN       = P1_6,              // GPIO
+        CELL_VCORE_1v1    = P0_4,              // ADC CTS_OPTIONAL AIN2
 
-        // mBed interface Pins
-        USBTX = TX_PIN_NUMBER,
-        USBRX = RX_PIN_NUMBER,
-        STDIO_UART_TX = TX_PIN_NUMBER,
-        STDIO_UART_RX = RX_PIN_NUMBER,
-        STDIO_UART_CTS = CTS_PIN_NUMBER,
-        STDIO_UART_RTS = RTS_PIN_NUMBER,
+        CONFIG0           = P0_13,             // GPIO
+        CONFIG1           = P0_14,             // GPIO
+        CONFIG2           = P0_15,             // GPIO
+        CONFIG3           = P0_16,             // GPIO
 
-        SPI_PSELMOSI0 = P1_13,
-        SPI_PSELMISO0 = P1_14,
-        SPI_PSELSS0 = P1_12,
-        SPI_PSELSCK0 = P1_15,
+        DCDC_I2C_SCL      = P1_15,             // I2C1
+        DCDC_I2C_SDA      = P1_14,             // I2C1
+        I2C_SCL           = DCDC_I2C_SCL,      // I2C1
+        I2C_SDA           = DCDC_I2C_SDA,      // I2C1
 
-        SPI_PSELMOSI1 = P1_2,
-        SPI_PSELMISO1 = P1_3,
-        SPI_PSELSS1 = P1_1,
-        SPI_PSELSCK1 = P1_4,
+        GPS_3v3           = P0_3,              // ADC AIN1
+        GPS_NFC_I2C_SCL   = P0_27,             // I2C2
+        GPS_NFC_I2C_SDA   = P0_26,             // I2C2
+        GPS_PWR_EN        = P1_10,             // GPIO
+        I2C_SCL2          = GPS_NFC_I2C_SCL,   // I2C2
+        I2C_SDA2          = GPS_NFC_I2C_SDA,   // I2C2
+        
+        QSPI_CLK          = P0_19,             // QSPI
+        QSPI_CS_N         = P0_17,             // QSPI
+        QSPI_DIO0         = P0_20,             // QSPI
+        QSPI_DIO1         = P0_21,             // QSPI
+        QSPI_DIO2         = P0_22,             // QSPI
+        QSPI_DIO3         = P0_23,             // QSPI
 
-        SPIS_PSELMOSI = P1_2,
-        SPIS_PSELMISO = P1_3,
-        SPIS_PSELSS = P1_1,
-        SPIS_PSELSCK = P1_4,
+        RESET_N           = P0_18,             // NRF
 
-        I2C_SDA0 = p26,
-        I2C_SCL0 = p27,
+        /**** LED ****/
+        STATUS_LED        = P1_5,              // GPIO
+        LED1              = STATUS_LED,        // GPIO
 
-        D0 = P1_1,
-        D1 = P1_2,
-        D2 = P1_3,
-        D3 = P1_4,
-        D4 = P1_5,
-        D5 = P1_6,
-        D6 = P1_7,
-        D7 = P1_8,
+        /**** WiFi ESP8266 ****/
+        PROG_WIFI_N       = P1_12,             // GPIO
+        WIFI_3v3          = P0_2,              // ADC AIN0
+        WIFI_CELLULAR_CTS = P0_7,              // UART1 CTS_TRACECLK
+        WIFI_CELLULAR_RTS = P0_5,              // UART1 RTS_AIN3
+        WIFI_CELLULAR_RX  = P0_8,              // UART1 RxD
+        WIFI_CELLULAR_TX  = P0_6,              // UART1 TxD
+        WIFI_N            = P1_7,              // GPIO
+        WIFI_PWR_EN       = P1_8,              // GPIO
+        WIFI_SLEEP_WAKEUP = P1_11,             // GPIO
 
-        D8 = P1_10,
-        D9 = P1_11,
-        D10 = P1_12,
-        D11 = P1_13,
-        D12 = P1_14,
-        D13 = P1_15,
+        /**** NFC ****/
+        NFC_FIELD_DETECT  = P1_13,             // GPIO
+        uC_NFC_A          = P0_9,              // RF
+        uC_NFC_B          = P0_10,             // RF
+        NFC1              = uC_NFC_A,          // RF
+        NFC2              = uC_NFC_B,          // RF
 
-        D14 = p26,
-        D15 = p27,
+        /**** Debug UART2 ****/
+        MAIN_TX           = P1_1,              // UART2
+        MAIN_RX           = P1_2,              // UART2
 
-        A0 = p3,
-        A1 = p4,
-        A2 = p28,
-        A3 = p29,
-        A4 = p30,
-        A5 = p31,
+        /*
+        USBRX/USBTX needed due to GreenteaSerial::GreenteaSerial() mbed-os/features/frameworks/greentea-client/source/greentea_serial.cpp
+        */     
+        USBRX            = MAIN_RX,           // UART2
+        USBTX            = MAIN_TX,           // UART2
+
+        RX_PIN_NUMBER     = MAIN_RX,           // UART2
+        TX_PIN_NUMBER     = MAIN_TX,           // UART2
+        CTS_PIN_NUMBER    = NC,                // UART2
+        RTS_PIN_NUMBER    = NC,                // UART2
+
+        STDIO_UART_TX     = TX_PIN_NUMBER,     // UART2
+        STDIO_UART_RX     = RX_PIN_NUMBER,     // UART2
+        STDIO_UART_CTS    = CTS_PIN_NUMBER,    // UART2
+        STDIO_UART_RTS    = RTS_PIN_NUMBER,    // UART2
+
+        // SPI_PSELMOSI0 = P1_13,
+        // SPI_PSELMISO0 = P1_14,
+        // SPI_PSELSS0 = P1_12,
+        // SPI_PSELSCK0 = P1_15,
+
+        // SPI_PSELMOSI1 = P1_2,
+        // SPI_PSELMISO1 = P1_3,
+        // SPI_PSELSS1 = P1_1,
+        // SPI_PSELSCK1 = P1_4,
+
+        // SPIS_PSELMOSI = P1_2,
+        // SPIS_PSELMISO = P1_3,
+        // SPIS_PSELSS = P1_1,
+        // SPIS_PSELSCK = P1_4,
+
+        /**** I2C Instance 0 ****/
+        I2C_SDA0          = I2C_SDA,
+        I2C_SCL0          = I2C_SCL,
+
+        // D0 = P1_1,
+        // D1 = P1_2,
+        // D2 = P1_3,
+        // D3 = P1_4,
+        // D4 = P1_5,
+        // D5 = P1_6,
+        // D6 = P1_7,
+        // D7 = P1_8,
+
+        // D8 = P1_10,
+        // D9 = P1_11,
+        // D10 = P1_12,
+        // D11 = P1_13,
+        // D12 = P1_14,
+        // D13 = P1_15,
+
+        // D14 = p26,
+        // D15 = p27,
+
+        // A0 = p3,
+        // A1 = p4,
+        // A2 = p28,
+        // A3 = p29,
+        // A4 = p30,
+        // A5 = p31,
 
         /**** QSPI pins ****/
-        QSPI1_IO0 = P0_20,
-        QSPI1_IO1 = P0_21,
-        QSPI1_IO2 = P0_22,
-        QSPI1_IO3 = P0_23,
-        QSPI1_SCK = P0_19,
-        QSPI1_CSN = P0_17,
+        QSPI1_IO0         = QSPI_DIO0,
+        QSPI1_IO1         = QSPI_DIO1,
+        QSPI1_IO2         = QSPI_DIO2,
+        QSPI1_IO3         = QSPI_DIO3,
+        QSPI1_SCK         = QSPI_CLK,
+        QSPI1_CSN         = QSPI_CS_N,
 
         /**** QSPI FLASH pins ****/
-        QSPI_FLASH1_IO0 = QSPI1_IO0,
-        QSPI_FLASH1_IO1 = QSPI1_IO1,
-        QSPI_FLASH1_IO2 = QSPI1_IO2,
-        QSPI_FLASH1_IO3 = QSPI1_IO3,
-        QSPI_FLASH1_SCK = QSPI1_SCK,
-        QSPI_FLASH1_CSN = QSPI1_CSN
+        QSPI_FLASH1_IO0   = QSPI1_IO0,
+        QSPI_FLASH1_IO1   = QSPI1_IO1,
+        QSPI_FLASH1_IO2   = QSPI1_IO2,
+        QSPI_FLASH1_IO3   = QSPI1_IO3,
+        QSPI_FLASH1_SCK   = QSPI1_SCK,
+        QSPI_FLASH1_CSN   = QSPI1_CSN
     } PinName;
 
     typedef enum
@@ -262,3 +320,5 @@ extern "C"
 #endif
 
 #endif
+
+
