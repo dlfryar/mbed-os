@@ -26,6 +26,8 @@
 #include "platform/Callback.h"
 #include "platform/mbed_debug.h"
 
+#include "mbed.h"
+
 #ifndef MBED_CONF_ESP8266_DEBUG
 #define MBED_CONF_ESP8266_DEBUG false
 #endif
@@ -305,6 +307,14 @@ bool ESP8266Interface::_get_firmware_ok()
 
 nsapi_error_t ESP8266Interface::_init(void)
 {
+    mbed::DigitalOut wifi_reset_n(RESET_N, 1); // reset line high to deassert
+    mbed::DigitalOut wifi_prog_no(PROG_WIFI_N, 1); // boot from flash mode
+    mbed::DigitalOut wifi_no(WIFI_N, 1); // configure mux for wifi
+    mbed::DigitalOut cell_power_control(CELL_PWR_EN, 0); // turn off cell
+    mbed::DigitalOut gnss_power_control(GPS_PWR_EN, 0);  // turn off gps
+    mbed::DigitalOut wifi_power_enable(WIFI_PWR_EN, 1); // vcc power on
+    wait(1);
+
     if (!_initialized) {
         if (!_esp.at_available()) {
             return NSAPI_ERROR_DEVICE_ERROR;
