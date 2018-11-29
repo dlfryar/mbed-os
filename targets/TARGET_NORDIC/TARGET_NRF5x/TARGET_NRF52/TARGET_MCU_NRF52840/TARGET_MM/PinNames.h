@@ -201,11 +201,30 @@ extern "C"
         QSPI_DIO2         = P0_22,             // QSPI
         QSPI_DIO3         = P0_23,             // QSPI
 
+        SPI_MOSI          = QSPI_DIO0,         // Single mode SPI
+        SPI_MISO          = QSPI_DIO1,         // Single mode SPI
+        SPI_CLK           = QSPI_CLK,          // Single mode SPI
+        SPI_CS            = QSPI_CS_N,         // Single mode SPI
+
+        SPI_SCK           = SPI_CLK,           // mbed-os/features/storage/system_storage/SystemStorage.cpp
+
         RESET_N           = P0_18,             // NRF
+
+        // Note: some button and led pins are defined due
+        // to hello world type examples that require them
 
         /**** LED ****/
         STATUS_LED        = P1_5,              // GPIO
         LED1              = STATUS_LED,        // GPIO
+        LED2              = STATUS_LED,        // GPIO
+        LED3              = STATUS_LED,        // GPIO
+        LED4              = STATUS_LED,        // GPIO
+        LED_RED           = STATUS_LED,        // GPIO
+        LED_GREEN         = STATUS_LED,        // GPIO
+        LED_BLUE          = STATUS_LED,        // GPIO
+
+        /**** BUTTON ****/
+        BUTTON1           = NC,
 
         /**** WiFi ESP8266 ****/
         PROG_WIFI_N       = P1_12,             // GPIO
